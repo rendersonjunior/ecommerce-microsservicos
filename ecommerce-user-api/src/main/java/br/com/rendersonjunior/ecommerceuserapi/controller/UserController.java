@@ -26,7 +26,6 @@ public class UserController {
         usuarios.add(userDTO);
         usuarios.add(userDTO2);
         usuarios.add(userDTO3);
-	usuarios.add(userDTO3);
     }
 
     @GetMapping
