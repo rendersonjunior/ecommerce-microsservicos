@@ -3,14 +3,13 @@ package br.com.rendersonjunior.ecommerceuserapi.controller;
 import br.com.rendersonjunior.ecommerceuserapi.dto.UserDTO;
 import br.com.rendersonjunior.ecommerceuserapi.model.User;
 import br.com.rendersonjunior.ecommerceuserapi.service.UserService;
-import jakarta.annotation.PostConstruct;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.awt.print.Pageable;
 import java.util.List;
 
 @RestController
@@ -35,6 +34,16 @@ public class UserController {
         return userService.findByCpf(cpf);
     }
 
+    @GetMapping("/search")
+    public List<UserDTO> queryByName(@RequestParam(name = "nome", required = true) String nome) {
+        return userService.queryByName(nome);
+    }
+
+    @GetMapping("/pageable")
+    public Page<UserDTO> getUsersPage(Pageable pageable) {
+        return userService.getAllPage(pageable);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public UserDTO newUser(@RequestBody @Valid UserDTO userDTO) {
@@ -47,9 +56,10 @@ public class UserController {
         userService.delete(id);
     }
 
-    @GetMapping("/search")
-    public List<UserDTO> queryByName(@RequestParam(name = "nome", required = true) String nome) {
-        return userService.queryByName(nome);
+    @PatchMapping("/{id}")
+    public UserDTO editUser(@PathVariable Long id,
+                            @RequestBody UserDTO userDTO) {
+        return userService.editUser(id, userDTO);
     }
 
 
