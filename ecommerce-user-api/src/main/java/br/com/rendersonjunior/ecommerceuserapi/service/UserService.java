@@ -1,6 +1,7 @@
 package br.com.rendersonjunior.ecommerceuserapi.service;
 
 import br.com.rendersonjunior.ecommerceuserapi.dto.UserDTO;
+import br.com.rendersonjunior.ecommerceuserapi.mapper.UserMapper;
 import br.com.rendersonjunior.ecommerceuserapi.model.User;
 import br.com.rendersonjunior.ecommerceuserapi.repository.UserRepository;
 import org.springframework.data.domain.Page;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -16,15 +18,19 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
+    private final UserMapper userMapper;
+
+    public UserService(UserRepository userRepository,
+                       UserMapper userMapper) {
         this.userRepository = userRepository;
+        this.userMapper = userMapper;
     }
 
     public List<UserDTO> getAll() {
         List<User> usuarios = userRepository.findAll();
         return usuarios
                 .stream()
-                .map(UserDTO::convert)
+                .map(userMapper::toDto)
                 .collect(Collectors.toList());
 
     }
@@ -32,15 +38,14 @@ public class UserService {
     public UserDTO findById(long userId) {
         User usuario = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
-
-        return UserDTO.convert(usuario);
+        return userMapper.toDto(usuario);
 
     }
 
     public UserDTO save(UserDTO userDTO) {
         userDTO.setDataCadastro(LocalDateTime.now());
-        User user = userRepository.save(User.convert(userDTO));
-        return UserDTO.convert(user);
+        User user = userRepository.save(userMapper.fromDto(userDTO));
+        return userMapper.toDto(user);
 
     }
 
@@ -48,14 +53,14 @@ public class UserService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("Not have record to delete"));
         userRepository.delete(user);
-        return UserDTO.convert(user);
+        return userMapper.toDto(user);
 
     }
 
     public UserDTO findByCpf(String cpf) {
         User user = userRepository.findByCpf(cpf);
         if (user != null) {
-            return UserDTO.convert(user);
+            return userMapper.toDto(user);
         }
         return null;
 
@@ -65,7 +70,7 @@ public class UserService {
         List<User> usuarios = userRepository.queryByNomeLike(name);
         return usuarios
                 .stream()
-                .map(UserDTO::convert)
+                .map(userMapper::toDto)
                 .collect(Collectors.toList());
 
     }
@@ -73,6 +78,10 @@ public class UserService {
     public UserDTO editUser(Long userId, UserDTO userDTO) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not exists"));
+
+        if (Objects.nonNull(userDTO.getNome()) && !user.getNome().equals(userDTO.getNome()) ) {
+            user.setNome(userDTO.getNome());
+        }
         if (userDTO.getEmail() != null && !user.getEmail().equals(userDTO.getEmail())) {
             user.setEmail(userDTO.getEmail());
         }
@@ -86,15 +95,14 @@ public class UserService {
         }
 
         user = userRepository.save(user);
-        return UserDTO.convert(user);
+        return userMapper.toDto(user);
 
     }
 
     public Page<UserDTO> getAllPage(Pageable page) {
         Page<User> users = userRepository.findAll(page);
-        return users.map(UserDTO::convert);
+        return users.map(userMapper::toDto);
 
     }
-
 
 }

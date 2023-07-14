@@ -6,11 +6,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.cglib.core.Local;
 
 import java.time.LocalDateTime;
 
@@ -45,17 +48,17 @@ public class User {
     @Column(name = "DATA_CADASTRO")
     private LocalDateTime dataCadastro;
 
-    public static User convert(UserDTO userDTO) {
-        User user = new User();
-        user.setNome(userDTO.getNome());
-        user.setEndereco(userDTO.getEndereco());
-        user.setCpf(userDTO.getCpf());
-        user.setEmail(userDTO.getEmail());
-        user.setTelefone(userDTO.getTelefone());
+    @Column(name = "DATA_ATUALIZACAO")
+    private LocalDateTime dataAtualizacao;
 
-        user.setDataCadastro(userDTO.getDataCadastro());
+    @PrePersist
+    private void insert(){
+        this.dataCadastro = LocalDateTime.now();
+    }
 
-        return user;
+    @PreUpdate
+    private void update() {
+        this.dataAtualizacao = LocalDateTime.now();
     }
 
 
