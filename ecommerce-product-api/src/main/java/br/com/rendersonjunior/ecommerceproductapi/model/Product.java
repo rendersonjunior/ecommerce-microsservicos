@@ -8,12 +8,16 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jdk.jfr.Category;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -44,7 +48,18 @@ public class Product {
     @JoinColumn(name = "CATEGORY_ID")
     private Category category;
 
-    public status Product convert(ProductDTO productDTO){
+    private LocalDateTime dataCadastro;
 
+    private LocalDateTime dataAtualizacao;
+
+    @PrePersist
+    private void insert() {
+        this.dataCadastro = LocalDateTime.now();
     }
+
+    @PreUpdate
+    private void update() {
+        this.dataAtualizacao = LocalDateTime.now();
+    }
+
 }
