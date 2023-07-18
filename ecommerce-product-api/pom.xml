@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.rendersonjunior</groupId>
-	<artifactId>ecommerceproductapi</artifactId>
+	<artifactId>ecommerce-product-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ecommerceproductapi</name>
+	<name>ecommerce-product-api</name>
 	<description>Projeto Spring utilizando microsserviços - product-api</description>
 	<properties>
 		<java.version>17</java.version>

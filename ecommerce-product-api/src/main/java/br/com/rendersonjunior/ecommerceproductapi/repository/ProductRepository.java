@@ -7,15 +7,16 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query(value = "select p "
-            +  "from product p "
-            +  "join category c on p.category.id = c.id "
+            +  "from Product p "
+            +  "join Category c on p.category.id = c.id "
             +  "where c.id = :categoryId")
     List<Product> getProductByCategory(@Param("categoryId") final long categoryId);
 
-    Product findByProductIdentifier(String productIdentifier);
+    Optional<Product> findByProductIdentifier(String productIdentifier);
 
 }

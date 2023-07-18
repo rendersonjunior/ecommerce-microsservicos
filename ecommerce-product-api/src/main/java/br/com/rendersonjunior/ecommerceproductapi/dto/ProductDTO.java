@@ -2,20 +2,31 @@ package br.com.rendersonjunior.ecommerceproductapi.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-public record ProductDTO(
+
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class ProductDTO {
         @NotBlank
-        String productIdentifier,
+        String productIdentifier;
 
         @NotBlank
-        String nome,
+        String nome;
 
         @NotBlank
-        String descricao,
+        String descricao;
 
         @NotNull
-        Double preco,
+        Double preco;
 
         @NotNull
-        CategoryDTO category) {
+        CategoryDTO category;
 }

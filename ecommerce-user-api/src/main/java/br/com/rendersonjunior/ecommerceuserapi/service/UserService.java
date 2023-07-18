@@ -30,7 +30,7 @@ public class UserService {
         List<User> usuarios = userRepository.findAll();
         return usuarios
                 .stream()
-                .map(userMapper::toDto)
+                .map(userMapper::toDTO)
                 .collect(Collectors.toList());
 
     }
@@ -38,14 +38,14 @@ public class UserService {
     public UserDTO findById(long userId) {
         User usuario = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
-        return userMapper.toDto(usuario);
+        return userMapper.toDTO(usuario);
 
     }
 
     public UserDTO save(UserDTO userDTO) {
         userDTO.setDataCadastro(LocalDateTime.now());
-        User user = userRepository.save(userMapper.fromDto(userDTO));
-        return userMapper.toDto(user);
+        User user = userRepository.save(userMapper.fromDTO(userDTO));
+        return userMapper.toDTO(user);
 
     }
 
@@ -53,14 +53,14 @@ public class UserService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("Not have record to delete"));
         userRepository.delete(user);
-        return userMapper.toDto(user);
+        return userMapper.toDTO(user);
 
     }
 
     public UserDTO findByCpf(String cpf) {
         User user = userRepository.findByCpf(cpf);
         if (user != null) {
-            return userMapper.toDto(user);
+            return userMapper.toDTO(user);
         }
         return null;
 
@@ -70,7 +70,7 @@ public class UserService {
         List<User> usuarios = userRepository.queryByNomeLike(name);
         return usuarios
                 .stream()
-                .map(userMapper::toDto)
+                .map(userMapper::toDTO)
                 .collect(Collectors.toList());
 
     }
@@ -79,7 +79,7 @@ public class UserService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not exists"));
 
-        if (Objects.nonNull(userDTO.getNome()) && !user.getNome().equals(userDTO.getNome()) ) {
+        if (Objects.nonNull(userDTO.getNome()) && !user.getNome().equals(userDTO.getNome())) {
             user.setNome(userDTO.getNome());
         }
         if (userDTO.getEmail() != null && !user.getEmail().equals(userDTO.getEmail())) {
@@ -95,13 +95,12 @@ public class UserService {
         }
 
         user = userRepository.save(user);
-        return userMapper.toDto(user);
+        return userMapper.toDTO(user);
 
     }
 
     public Page<UserDTO> getAllPage(Pageable page) {
-        Page<User> users = userRepository.findAll(page);
-        return users.map(userMapper::toDto);
+        return userRepository.findAll(page).map(userMapper::toDTO);
 
     }
 

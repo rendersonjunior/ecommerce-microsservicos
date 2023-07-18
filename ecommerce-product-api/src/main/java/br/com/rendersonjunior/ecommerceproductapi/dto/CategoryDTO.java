@@ -2,10 +2,20 @@ package br.com.rendersonjunior.ecommerceproductapi.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-public record CategoryDTO (
-   @NotNull
-   long id,
-
-   @NotBlank
-   String nome) {}
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class CategoryDTO {
+    @NotNull
+    private long id;
+    @NotBlank
+    private String nome;
+}
