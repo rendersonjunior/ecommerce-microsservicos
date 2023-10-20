@@ -5,10 +5,13 @@ import com.rendersonjunior.ecommerceshoppingapi.dto.ShopDTO;
 import com.rendersonjunior.ecommerceshoppingapi.mapper.ShopMapper;
 import com.rendersonjunior.ecommerceshoppingapi.model.Shop;
 import com.rendersonjunior.ecommerceshoppingapi.repository.ShopRepository;
+import com.rendersonjunior.ecommerceshoppingapi.repository.specification.SpecificationShopByFilters;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -65,4 +68,15 @@ public class ShopService {
         return shopDTO;
     }
 
+    public List<ShopDTO> getShopByFilter(final LocalDate dataInicio,
+                                         final LocalDate dataFim,
+                                         final BigDecimal valorMinimo,
+                                         final Pageable pageable) {
+        return shopRepository.findAll(SpecificationShopByFilters
+                .builder()
+                .dataInicio(dataInicio)
+                .dataFim(dataFim)
+                .valorMinimo(valorMinimo)
+                .build(), pageable).stream().map(shopMapper::toDTO).collect(Collectors.toList());
+    }
 }
