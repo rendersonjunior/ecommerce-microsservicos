@@ -21,4 +21,13 @@ public class Item {
 
     @Column(name = "PRECO")
     private BigDecimal price;
+
+    @Override
+    public String toString() {
+        return String.format(
+                "Item Compra > Cód. Produto: %s, Preço: %.2f",
+                productIdentifier,
+                price);
+    }
+
 }

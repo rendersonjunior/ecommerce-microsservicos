@@ -37,4 +37,13 @@ public class Shop {
     @CollectionTable(name = "item", joinColumns = @JoinColumn(name = "shop_id"))
     private List<Item> items;
 
+    @Override
+    public String toString() {
+        return String.format(
+                "Compra > Cód. Usuário: %s, Total: %.2f, Data: %tF",
+                userIdentifier,
+                total,
+                date);
+    }
+
 }
