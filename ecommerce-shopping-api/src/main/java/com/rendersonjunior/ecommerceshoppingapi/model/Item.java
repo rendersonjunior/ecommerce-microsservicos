@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
-public class Item {
+public class Item implements Comparable<Item>{
 
     @Column(name = "PRODUCT_IDENTIFIER")
     private String productIdentifier;
@@ -30,4 +30,8 @@ public class Item {
                 price);
     }
 
+    @Override
+    public int compareTo(Item o) {
+        return this.price.compareTo(o.price);
+    }
 }

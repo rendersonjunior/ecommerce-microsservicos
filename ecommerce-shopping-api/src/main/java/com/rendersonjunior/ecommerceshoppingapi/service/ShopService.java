@@ -28,6 +28,7 @@ public class ShopService {
     public List<ShopDTO> getAll() {
         return shopRepository.findAll()
                 .stream()
+                .sorted()
                 .map(shopMapper::toDTO)
                 .collect(Collectors.toList());
     }

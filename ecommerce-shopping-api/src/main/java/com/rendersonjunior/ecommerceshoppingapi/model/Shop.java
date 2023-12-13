@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "shop")
-public class Shop {
+public class Shop implements Comparable<Shop>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,6 +44,11 @@ public class Shop {
                 userIdentifier,
                 total,
                 date);
+    }
+
+    @Override
+    public int compareTo(Shop o) {
+        return this.date.compareTo(o.date);
     }
 
 }
