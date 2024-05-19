@@ -2,8 +2,10 @@ package com.rendersonjunior.ecommerceshoppingapi.service;
 
 import com.rendersonjunior.ecommerceshoppingapi.dto.ItemDTO;
 import com.rendersonjunior.ecommerceshoppingapi.dto.ShopDTO;
+import com.rendersonjunior.ecommerceshoppingapi.dto.ShopReportDTO;
 import com.rendersonjunior.ecommerceshoppingapi.mapper.ShopMapper;
 import com.rendersonjunior.ecommerceshoppingapi.model.Shop;
+import com.rendersonjunior.ecommerceshoppingapi.repository.ReportRepository;
 import com.rendersonjunior.ecommerceshoppingapi.repository.ShopRepository;
 import com.rendersonjunior.ecommerceshoppingapi.repository.specification.SpecificationShopByFilters;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +24,8 @@ import java.util.stream.Collectors;
 public class ShopService {
 
     private final ShopRepository shopRepository;
+
+    private final ReportRepository reportRepository;
 
     private final ShopMapper shopMapper;
 
@@ -79,5 +83,11 @@ public class ShopService {
                 .dataFim(dataFim)
                 .valorMinimo(valorMinimo)
                 .build(), pageable).stream().map(shopMapper::toDTO).collect(Collectors.toList());
+    }
+
+    public ShopReportDTO getReportByDate(final LocalDate dataInicio,
+                                         final LocalDate dataFim) {
+        return reportRepository.getReportByDate(dataInicio.atTime(0, 0, 0),
+                dataFim.atTime(23, 59, 59));
     }
 }

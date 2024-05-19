@@ -2,14 +2,23 @@ package com.rendersonjunior.ecommerceshoppingapi.repository;
 
 import com.rendersonjunior.ecommerceshoppingapi.dto.ShopReportDTO;
 import com.rendersonjunior.ecommerceshoppingapi.model.Shop;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 
-public interface ReportRepository {
+@Repository
+public interface ReportRepository extends JpaRepository<Shop, Long> {
 
-    List<Shop> getShopByFilters(LocalDateTime dataInicio, LocalDateTime dataFim, BigDecimal valorMinimo);
-    ShopReportDTO getReportByDate(LocalDateTime dataInicio, LocalDateTime dataFim);
+    @Query("""
+        select new com.rendersonjunior.ecommerceshoppingapi.dto.ShopReportDTO(count(s.id), sum(s.total), avg(s.total))
+          from Shop s
+        where s.date >= :dataInicio
+          and s.date <= :dataFim
+        """)
+    ShopReportDTO getReportByDate(@Param("dataInicio") final LocalDateTime dataInicio,
+                                  @Param("dataFim") final LocalDateTime dataFim);
 
 }

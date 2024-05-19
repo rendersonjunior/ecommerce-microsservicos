@@ -12,9 +12,8 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ShopReportDTO {
-
     private Long count;
     private BigDecimal total;
-    private BigDecimal mean;
+    private Double mean;
 
 }
