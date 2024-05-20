@@ -1,4 +1,4 @@
-package com.rendersonjunior.ecommerceshoppingapi.dto;
+package com.rendersonjunior.dto;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;

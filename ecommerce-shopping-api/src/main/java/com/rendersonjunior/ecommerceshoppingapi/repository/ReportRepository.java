@@ -1,6 +1,6 @@
 package com.rendersonjunior.ecommerceshoppingapi.repository;
 
-import com.rendersonjunior.ecommerceshoppingapi.dto.ShopReportDTO;
+import com.rendersonjunior.dto.ShopReportDTO;
 import com.rendersonjunior.ecommerceshoppingapi.model.Shop;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public interface ReportRepository extends JpaRepository<Shop, Long> {
 
     @Query("""
-        select new com.rendersonjunior.ecommerceshoppingapi.dto.ShopReportDTO(count(s.id), sum(s.total), avg(s.total))
+        select new com.rendersonjunior.dto.ShopReportDTO(count(s.id), sum(s.total), avg(s.total))
           from Shop s
         where s.date >= :dataInicio
           and s.date <= :dataFim

@@ -1,6 +1,5 @@
 package br.com.rendersonjunior.ecommerceuserapi.model;
 
-import br.com.rendersonjunior.ecommerceuserapi.dto.UserDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,7 +12,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.cglib.core.Local;
 
 import java.time.LocalDateTime;
 
@@ -52,7 +50,7 @@ public class User {
     private LocalDateTime dataAtualizacao;
 
     @PrePersist
-    private void insert(){
+    private void insert() {
         this.dataCadastro = LocalDateTime.now();
     }
 
@@ -60,6 +58,5 @@ public class User {
     private void update() {
         this.dataAtualizacao = LocalDateTime.now();
     }
-
 
 }

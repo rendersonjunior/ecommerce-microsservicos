@@ -1,21 +1,24 @@
-package br.com.rendersonjunior.ecommerceproductapi.dto;
+package com.rendersonjunior.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
-@Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class CategoryDTO {
-    @NotNull
-    private long id;
+@NoArgsConstructor
+public class ItemDTO {
+
     @NotBlank
-    private String nome;
+    private String productIdentifier;
+
+    @NotNull
+    private BigDecimal price;
+
 }

@@ -1,4 +1,4 @@
-package com.rendersonjunior.ecommerceshoppingapi.dto;
+package com.rendersonjunior.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

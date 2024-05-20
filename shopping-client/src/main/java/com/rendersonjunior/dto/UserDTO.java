@@ -1,4 +1,4 @@
-package br.com.rendersonjunior.ecommerceuserapi.dto;
+package com.rendersonjunior.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
