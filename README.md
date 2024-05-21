@@ -1,2 +1,3 @@
-# ecommerce-microsservicos
-Projeto Java Spring utilizando arquitetura de microsserviços, com utilização de conteiners docker e kubernetes. Este projeto está sendo direcionado pelo livro Backend Java com Microsserviços, Spring Boot e Kubernetes. (Eduardo Santana). No entanto, com base em outras experiências adquiridas, foram adaptadas outras tecnologias em alguns trechos.
+# Projeto Java Spring com Microsserviços
+
+Este projeto implementa uma arquitetura de microsserviços utilizando Java Spring, Docker e Kubernetes. A base do projeto é orientada pelo livro *Backend Java com Microsserviços, Spring Boot e Kubernetes* de Eduardo Santana. Além disso, algumas adaptações foram feitas com base em experiências prévias, incorporando outras tecnologias onde aplicável.
