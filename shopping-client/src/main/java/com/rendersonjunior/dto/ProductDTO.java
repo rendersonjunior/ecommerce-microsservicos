@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 
 @Getter
 @Setter
@@ -25,7 +27,7 @@ public class ProductDTO {
         String descricao;
 
         @NotNull
-        Double preco;
+        BigDecimal preco;
 
         @NotNull
         CategoryDTO category;

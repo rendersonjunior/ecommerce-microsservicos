@@ -8,7 +8,9 @@ import com.rendersonjunior.ecommerceshoppingapi.model.Shop;
 import com.rendersonjunior.ecommerceshoppingapi.repository.ReportRepository;
 import com.rendersonjunior.ecommerceshoppingapi.repository.ShopRepository;
 import com.rendersonjunior.ecommerceshoppingapi.repository.specification.SpecificationShopByFilters;
-import lombok.RequiredArgsConstructor;
+import com.rendersonjunior.ecommerceshoppingapi.service.product.ProductService;
+import com.rendersonjunior.ecommerceshoppingapi.service.user.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -19,15 +21,26 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static java.util.Objects.isNull;
+import static org.apache.commons.lang3.BooleanUtils.isFalse;
+
 @Service
-@RequiredArgsConstructor
 public class ShopService implements IShopService {
 
-    private final ShopRepository shopRepository;
+    @Autowired
+    private ShopRepository shopRepository;
 
-    private final ReportRepository reportRepository;
+    @Autowired
+    private ReportRepository reportRepository;
 
-    private final ShopMapper shopMapper;
+    @Autowired
+    private ProductService productService;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private ShopMapper shopMapper;
 
     public List<ShopDTO> getAll() {
         return shopRepository.findAll()
@@ -64,13 +77,35 @@ public class ShopService implements IShopService {
     }
 
     public ShopDTO save(final ShopDTO shopDTO) {
+
+        if (isNull(userService.getUserByCpf(shopDTO.getUserIdentifier()))) {
+            return null;
+        }
+
+        if (isFalse(validateProducts(shopDTO.getItems()))) {
+            return null;
+        }
+
         shopDTO.setTotal(shopDTO.getItems()
                 .stream()
                 .map(ItemDTO::getPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add));
         shopDTO.setDate(LocalDateTime.now());
         shopRepository.save(shopMapper.fromDTO(shopDTO));
+
         return shopDTO;
+    }
+
+    private boolean validateProducts(final List<ItemDTO> items) {
+
+        for (final var item : items) {
+            final var productDTO = this.productService.getProductByIdentifier(item.getProductIdentifier());
+            if (isNull(productDTO)) {
+                return false;
+            }
+            item.setPrice(productDTO.getPreco());
+        }
+        return true;
     }
 
     public List<ShopDTO> getShopByFilter(final LocalDate dataInicio,
@@ -90,4 +125,5 @@ public class ShopService implements IShopService {
         return reportRepository.getReportByDate(dataInicio.atTime(0, 0, 0),
                 dataFim.atTime(23, 59, 59));
     }
+
 }
