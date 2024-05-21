@@ -20,33 +20,33 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "USUARIO")
+@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "id")
     private long id;
 
-    @Column(name = "NOME")
+    @Column(name = "nome")
     private String nome;
 
-    @Column(name = "CPF")
+    @Column(name = "cpf")
     private String cpf;
 
-    @Column(name = "ENDERECO")
+    @Column(name = "endereco")
     private String endereco;
 
-    @Column(name = "EMAIL")
+    @Column(name = "email")
     private String email;
 
-    @Column(name = "TELEFONE")
+    @Column(name = "telefone")
     private String telefone;
 
-    @Column(name = "DATA_CADASTRO")
+    @Column(name = "data_cadastro")
     private LocalDateTime dataCadastro;
 
-    @Column(name = "DATA_ATUALIZACAO")
+    @Column(name = "data_atualizacao")
     private LocalDateTime dataAtualizacao;
 
     @PrePersist

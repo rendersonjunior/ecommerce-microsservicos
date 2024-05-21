@@ -1,11 +1,11 @@
-CREATE SCHEMA IF NOT EXISTS users;
+create schema if not exists users;
 
-CREATE TABLE USUARIO(
-      id BIGSERIAL PRIMARY KEY,
-      nome VARCHAR(100) NOT NULL,
-      cpf VARCHAR(100) NOT NULL,
-      endereco VARCHAR(100) NOT NULL,
-      email VARCHAR(100) NOT NULL,
-      telefone VARCHAR(100) NOT NULL,
-      data_cadastro TIMESTAMP NOT NULL
+create table users.users(
+      id bigserial primary key,
+      nome varchar(100) not null,
+      cpf varchar(11) not null,
+      endereco varchar(100) not null,
+      email varchar(100) not null,
+      telefone varchar(100) not null,
+      data_cadastro timestamp not null
 );

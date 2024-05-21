@@ -1,6 +1,6 @@
-CREATE SCHEMA IF NOT EXISTS products;
+create schema if not exists products;
 
-create table products.CATEGORIA (
+create table products.category (
    id bigserial primary key,
    nome varchar(100) not null
 );

@@ -21,16 +21,16 @@ public class Shop implements Comparable<Shop>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "id")
     private long id;
 
-    @Column(name = "USER_IDENTIFIER")
+    @Column(name = "user_identifier")
     private String userIdentifier;
 
-    @Column(name = "TOTAL")
+    @Column(name = "total")
     private BigDecimal total;
 
-    @Column(name = "DATE")
+    @Column(name = "date")
     private LocalDateTime date;
 
     @ElementCollection(fetch = FetchType.EAGER)

@@ -1,1 +1,1 @@
-ALTER TABLE USUARIO ADD COLUMN data_atualizacao TIMESTAMP;
+alter table users.users add column data_atualizacao timestamp;

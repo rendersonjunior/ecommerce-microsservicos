@@ -24,28 +24,28 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "PRODUTO")
+@Table(name = "product")
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "id")
     private long id;
 
-    @Column(name = "PRODUCT_IDENTIFIER")
+    @Column(name = "product_identifier")
     private String productIdentifier;
 
-    @Column(name = "NOME")
+    @Column(name = "nome")
     private String nome;
 
-    @Column(name = "DESCRICAO")
+    @Column(name = "descricao")
     private String descricao;
 
-    @Column(name = "PRECO")
+    @Column(name = "preco")
     private BigDecimal preco;
 
     @ManyToOne
-    @JoinColumn(name = "CATEGORY_ID")
+    @JoinColumn(name = "category_id")
     private Category category;
 
     private LocalDateTime dataCadastro;
