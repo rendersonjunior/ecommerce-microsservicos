@@ -1,6 +1,6 @@
 package br.com.rendersonjunior.ecommerceuserapi.service;
 
-import br.com.rendersonjunior.ecommerceuserapi.dto.UserDTO;
+import com.rendersonjunior.dto.UserDTO;
 import br.com.rendersonjunior.ecommerceuserapi.mapper.UserMapper;
 import br.com.rendersonjunior.ecommerceuserapi.model.User;
 import br.com.rendersonjunior.ecommerceuserapi.repository.UserRepository;

@@ -1,9 +1,10 @@
 package br.com.rendersonjunior.ecommerceuserapi.controller;
 
-import br.com.rendersonjunior.ecommerceuserapi.dto.UserDTO;
+import com.rendersonjunior.dto.UserDTO;
 import br.com.rendersonjunior.ecommerceuserapi.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -22,10 +23,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user")
-@RequiredArgsConstructor
 public class UserController {
 
-    private final UserService userService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping
     public List<UserDTO> getUsers() {
@@ -69,6 +70,5 @@ public class UserController {
                             @RequestBody UserDTO userDTO) {
         return userService.editUser(id, userDTO);
     }
-
 
 }
