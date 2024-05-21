@@ -1,7 +1,7 @@
 package br.com.rendersonjunior.ecommerceproductapi.mapper;
 
-import br.com.rendersonjunior.ecommerceproductapi.dto.ProductDTO;
 import br.com.rendersonjunior.ecommerceproductapi.model.Product;
+import com.rendersonjunior.dto.ProductDTO;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

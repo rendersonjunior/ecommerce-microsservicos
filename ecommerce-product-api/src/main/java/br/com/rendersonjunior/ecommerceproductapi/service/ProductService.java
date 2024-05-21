@@ -1,9 +1,9 @@
 package br.com.rendersonjunior.ecommerceproductapi.service;
 
-import br.com.rendersonjunior.ecommerceproductapi.dto.ProductDTO;
 import br.com.rendersonjunior.ecommerceproductapi.mapper.ProductMapper;
 import br.com.rendersonjunior.ecommerceproductapi.model.Product;
 import br.com.rendersonjunior.ecommerceproductapi.repository.ProductRepository;
+import com.rendersonjunior.dto.ProductDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

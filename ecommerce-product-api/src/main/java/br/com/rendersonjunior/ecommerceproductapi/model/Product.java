@@ -16,6 +16,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Getter
@@ -41,7 +42,7 @@ public class Product {
     private String descricao;
 
     @Column(name = "PRECO")
-    private double preco;
+    private BigDecimal preco;
 
     @ManyToOne
     @JoinColumn(name = "CATEGORY_ID")

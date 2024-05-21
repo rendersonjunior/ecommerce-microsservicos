@@ -1,7 +1,7 @@
 package br.com.rendersonjunior.ecommerceproductapi.controller;
 
-import br.com.rendersonjunior.ecommerceproductapi.dto.ProductDTO;
 import br.com.rendersonjunior.ecommerceproductapi.service.ProductService;
+import com.rendersonjunior.dto.ProductDTO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
