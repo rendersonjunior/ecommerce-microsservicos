@@ -1,4 +1,4 @@
-package com.rendersonjunior.ecommerceshoppingapi.service.UserService;
+package com.rendersonjunior.ecommerceshoppingapi.service.user;
 
 
 import com.rendersonjunior.dto.UserDTO;

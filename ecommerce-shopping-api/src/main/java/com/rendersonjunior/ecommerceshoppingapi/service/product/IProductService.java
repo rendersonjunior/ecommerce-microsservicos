@@ -1,4 +1,4 @@
-package com.rendersonjunior.ecommerceshoppingapi.service.ProductService;
+package com.rendersonjunior.ecommerceshoppingapi.service.product;
 
 import com.rendersonjunior.dto.ProductDTO;
 

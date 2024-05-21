@@ -2,7 +2,7 @@ package com.rendersonjunior.ecommerceshoppingapi.controller;
 
 import com.rendersonjunior.ecommerceshoppingapi.dto.ShopDTO;
 import com.rendersonjunior.ecommerceshoppingapi.dto.ShopReportDTO;
-import com.rendersonjunior.ecommerceshoppingapi.service.ShopService;
+import com.rendersonjunior.ecommerceshoppingapi.service.shop.ShopService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;

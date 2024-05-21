@@ -1,8 +1,8 @@
-package com.rendersonjunior.ecommerceshoppingapi.service;
+package com.rendersonjunior.ecommerceshoppingapi.service.shop;
 
-import com.rendersonjunior.ecommerceshoppingapi.dto.ItemDTO;
-import com.rendersonjunior.ecommerceshoppingapi.dto.ShopDTO;
-import com.rendersonjunior.ecommerceshoppingapi.dto.ShopReportDTO;
+import com.rendersonjunior.dto.ItemDTO;
+import com.rendersonjunior.dto.ShopDTO;
+import com.rendersonjunior.dto.ShopReportDTO;
 import com.rendersonjunior.ecommerceshoppingapi.mapper.ShopMapper;
 import com.rendersonjunior.ecommerceshoppingapi.model.Shop;
 import com.rendersonjunior.ecommerceshoppingapi.repository.ReportRepository;
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class ShopService {
+public class ShopService implements IShopService {
 
     private final ShopRepository shopRepository;
 
@@ -37,33 +37,33 @@ public class ShopService {
                 .collect(Collectors.toList());
     }
 
-    public List<ShopDTO> getByUser(String userIdentifier) {
+    public List<ShopDTO> getByUser(final String userIdentifier) {
         return shopRepository.findAllByUserIdentifier(userIdentifier)
                 .stream()
                 .map(shopMapper::toDTO)
                 .collect(Collectors.toList());
     }
 
-    public List<ShopDTO> getByDate(ShopDTO shopDTO) {
+    public List<ShopDTO> getByDate(final ShopDTO shopDTO) {
         return shopRepository.findAllByDateGreaterThan(shopDTO.getDate())
                 .stream()
                 .map(shopMapper::toDTO)
                 .collect(Collectors.toList());
     }
 
-    public List<ShopDTO> getByValue(BigDecimal value) {
+    public List<ShopDTO> getByValue(final BigDecimal value) {
         return shopRepository.findAllByTotalGreaterThan(value)
                 .stream()
                 .map(shopMapper::toDTO)
                 .collect(Collectors.toList());
     }
 
-    public ShopDTO findById(Long productId) {
+    public ShopDTO findById(final Long productId) {
         Optional<Shop> shop = shopRepository.findById(productId);
         return shopMapper.toDTO(shop.orElse(null));
     }
 
-    public ShopDTO save(ShopDTO shopDTO) {
+    public ShopDTO save(final ShopDTO shopDTO) {
         shopDTO.setTotal(shopDTO.getItems()
                 .stream()
                 .map(ItemDTO::getPrice)
