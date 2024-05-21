@@ -1,7 +1,7 @@
 package com.rendersonjunior.ecommerceshoppingapi.controller;
 
-import com.rendersonjunior.ecommerceshoppingapi.dto.ShopDTO;
-import com.rendersonjunior.ecommerceshoppingapi.dto.ShopReportDTO;
+import com.rendersonjunior.dto.ShopDTO;
+import com.rendersonjunior.dto.ShopReportDTO;
 import com.rendersonjunior.ecommerceshoppingapi.service.shop.ShopService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -44,20 +44,12 @@ public class ShopController {
     }
 
     @GetMapping("/search")
-    public List<ShopDTO> getShopsByFilter(@RequestParam(name = "dataInicio", required = true)
-                                          @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dataInicio,
-                                          @RequestParam(name = "dataFim", required = false)
-                                          @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dataFim,
-                                          @RequestParam(name = "valorMinimo", required = false) BigDecimal valorMinimo,
-                                          Pageable pageable) {
+    public List<ShopDTO> getShopsByFilter(@RequestParam(name = "dataInicio", required = true) @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dataInicio, @RequestParam(name = "dataFim", required = false) @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dataFim, @RequestParam(name = "valorMinimo", required = false) BigDecimal valorMinimo, Pageable pageable) {
         return shopService.getShopByFilter(dataInicio, dataFim, valorMinimo, pageable);
     }
 
     @GetMapping("/report")
-    public ShopReportDTO getReportByDate(@RequestParam(name = "dataInicio", required = true)
-                                         @DateTimeFormat(pattern = "dd/MM/yyyy") final LocalDate dataInicio,
-                                         @RequestParam(name = "dataFim", required = true)
-                                         @DateTimeFormat(pattern = "dd/MM/yyyy") final LocalDate dataFim) {
+    public ShopReportDTO getReportByDate(@RequestParam(name = "dataInicio", required = true) @DateTimeFormat(pattern = "dd/MM/yyyy") final LocalDate dataInicio, @RequestParam(name = "dataFim", required = true) @DateTimeFormat(pattern = "dd/MM/yyyy") final LocalDate dataFim) {
         return shopService.getReportByDate(dataInicio, dataFim);
     }
 
