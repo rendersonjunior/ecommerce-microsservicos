@@ -4,6 +4,7 @@ import com.rendersonjunior.dto.UserDTO;
 import br.com.rendersonjunior.ecommerceuserapi.mapper.UserMapper;
 import br.com.rendersonjunior.ecommerceuserapi.model.User;
 import br.com.rendersonjunior.ecommerceuserapi.repository.UserRepository;
+import com.rendersonjunior.exception.UserNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -54,7 +55,6 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("Not have record to delete"));
         userRepository.delete(user);
         return userMapper.toDTO(user);
-
     }
 
     public UserDTO findByCpf(String cpf) {
@@ -62,8 +62,7 @@ public class UserService {
         if (user != null) {
             return userMapper.toDTO(user);
         }
-        return null;
-
+        throw new UserNotFoundException();
     }
 
     public List<UserDTO> queryByName(String name) {
@@ -72,7 +71,6 @@ public class UserService {
                 .stream()
                 .map(userMapper::toDTO)
                 .collect(Collectors.toList());
-
     }
 
     public UserDTO editUser(Long userId, UserDTO userDTO) {
@@ -96,12 +94,10 @@ public class UserService {
 
         user = userRepository.save(user);
         return userMapper.toDTO(user);
-
     }
 
     public Page<UserDTO> getAllPage(Pageable page) {
         return userRepository.findAll(page).map(userMapper::toDTO);
-
     }
 
 }
