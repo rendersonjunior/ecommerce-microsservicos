@@ -18,7 +18,7 @@ import static java.util.Objects.nonNull;
 import static org.apache.commons.lang3.BooleanUtils.isFalse;
 
 @Service
-public class ProductService {
+public class ProductService implements IProductService {
 
     private final ProductRepository productRepository;
 

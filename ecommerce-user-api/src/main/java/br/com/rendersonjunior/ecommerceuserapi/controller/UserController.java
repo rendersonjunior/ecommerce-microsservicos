@@ -1,9 +1,8 @@
 package br.com.rendersonjunior.ecommerceuserapi.controller;
 
 import com.rendersonjunior.dto.UserDTO;
-import br.com.rendersonjunior.ecommerceuserapi.service.UserService;
+import br.com.rendersonjunior.ecommerceuserapi.service.user.UserService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -1,15 +1,11 @@
 package br.com.rendersonjunior.ecommerceproductapi.service.product;
 
-import br.com.rendersonjunior.ecommerceproductapi.model.Product;
 import com.rendersonjunior.dto.ProductDTO;
-import com.rendersonjunior.exception.ProductNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
-
-import static java.util.Objects.nonNull;
 
 public interface IProductService {
 
