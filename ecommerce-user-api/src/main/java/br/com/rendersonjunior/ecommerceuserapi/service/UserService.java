@@ -1,9 +1,8 @@
 package br.com.rendersonjunior.ecommerceuserapi.service;
 
-import com.rendersonjunior.dto.UserDTO;
 import br.com.rendersonjunior.ecommerceuserapi.mapper.UserMapper;
-import br.com.rendersonjunior.ecommerceuserapi.model.User;
 import br.com.rendersonjunior.ecommerceuserapi.repository.UserRepository;
+import com.rendersonjunior.dto.UserDTO;
 import com.rendersonjunior.exception.UserNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,37 +27,32 @@ public class UserService {
     }
 
     public List<UserDTO> getAll() {
-        List<User> usuarios = userRepository.findAll();
+        final var usuarios = userRepository.findAll();
         return usuarios
                 .stream()
                 .map(userMapper::toDTO)
                 .collect(Collectors.toList());
-
     }
 
     public UserDTO findById(long userId) {
-        User usuario = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-        return userMapper.toDTO(usuario);
-
+        return userMapper.toDTO(userRepository.findById(userId)
+                .orElseThrow(UserNotFoundException::new));
     }
 
     public UserDTO save(UserDTO userDTO) {
         userDTO.setDataCadastro(LocalDateTime.now());
-        User user = userRepository.save(userMapper.fromDTO(userDTO));
-        return userMapper.toDTO(user);
-
+        return userMapper.toDTO(userRepository.save(userMapper.fromDTO(userDTO)));
     }
 
     public UserDTO delete(long userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("Not have record to delete"));
+        final var user = userRepository.findById(userId)
+                .orElseThrow(UserNotFoundException::new);
         userRepository.delete(user);
         return userMapper.toDTO(user);
     }
 
     public UserDTO findByCpf(String cpf) {
-        User user = userRepository.findByCpf(cpf);
+        final var user = userRepository.findByCpf(cpf);
         if (user != null) {
             return userMapper.toDTO(user);
         }
@@ -66,7 +60,7 @@ public class UserService {
     }
 
     public List<UserDTO> queryByName(String name) {
-        List<User> usuarios = userRepository.queryByNomeLike(name);
+        final var usuarios = userRepository.queryByNomeLike(name);
         return usuarios
                 .stream()
                 .map(userMapper::toDTO)
@@ -74,7 +68,7 @@ public class UserService {
     }
 
     public UserDTO editUser(Long userId, UserDTO userDTO) {
-        User user = userRepository.findById(userId)
+        final var user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not exists"));
 
         if (Objects.nonNull(userDTO.getNome()) && !user.getNome().equals(userDTO.getNome())) {
@@ -92,8 +86,7 @@ public class UserService {
             user.setEndereco(userDTO.getEndereco());
         }
 
-        user = userRepository.save(user);
-        return userMapper.toDTO(user);
+        return userMapper.toDTO(userRepository.save(user));
     }
 
     public Page<UserDTO> getAllPage(Pageable page) {
