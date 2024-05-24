@@ -1,6 +1,7 @@
 package br.com.rendersonjunior.ecommerceuserapi.service.user;
 
 import br.com.rendersonjunior.ecommerceuserapi.mapper.UserMapper;
+import br.com.rendersonjunior.ecommerceuserapi.model.User;
 import br.com.rendersonjunior.ecommerceuserapi.repository.UserRepository;
 import com.rendersonjunior.dto.UserDTO;
 import com.rendersonjunior.exception.UserNotFoundException;
@@ -11,7 +12,10 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 import java.util.stream.Collectors;
+
+import static java.util.Objects.nonNull;
 
 @Service
 public class UserService implements IUserService {
@@ -39,9 +43,10 @@ public class UserService implements IUserService {
                 .orElseThrow(UserNotFoundException::new));
     }
 
-    public UserDTO save(UserDTO userDTO) {
-        userDTO.setDataCadastro(LocalDateTime.now());
-        return userMapper.toDTO(userRepository.save(userMapper.fromDTO(userDTO)));
+    public User save(User user) {
+        user.setKey(UUID.randomUUID().toString());
+        user.setDataCadastro(LocalDateTime.now());
+        return userRepository.save(user);
     }
 
     public UserDTO delete(long userId) {
@@ -51,10 +56,10 @@ public class UserService implements IUserService {
         return userMapper.toDTO(user);
     }
 
-    public UserDTO findByCpf(String cpf) {
-        final var user = userRepository.findByCpf(cpf);
-        if (user != null) {
-            return userMapper.toDTO(user);
+    public User findByCpf(final String cpf, final String key) {
+        final var user = userRepository.findByCpfAndKey(cpf, key);
+        if (nonNull(user)) {
+            return user;
         }
         throw new UserNotFoundException();
     }
@@ -71,7 +76,7 @@ public class UserService implements IUserService {
         final var user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not exists"));
 
-        if (Objects.nonNull(userDTO.getNome()) && !user.getNome().equals(userDTO.getNome())) {
+        if (nonNull(userDTO.getNome()) && !user.getNome().equals(userDTO.getNome())) {
             user.setNome(userDTO.getNome());
         }
         if (userDTO.getEmail() != null && !user.getEmail().equals(userDTO.getEmail())) {

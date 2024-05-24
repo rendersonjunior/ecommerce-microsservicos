@@ -9,8 +9,8 @@ import java.util.List;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    User findByCpf(String cpf);
+    User findByCpfAndKey(final String cpf, final String key);
 
-    List<User> queryByNomeLike(String name);
+    List<User> queryByNomeLike(final String name);
 
 }

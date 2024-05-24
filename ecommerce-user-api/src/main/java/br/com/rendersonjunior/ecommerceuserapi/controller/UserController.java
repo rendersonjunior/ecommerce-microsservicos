@@ -1,7 +1,8 @@
 package br.com.rendersonjunior.ecommerceuserapi.controller;
 
+import br.com.rendersonjunior.ecommerceuserapi.mapper.UserMapper;
+import br.com.rendersonjunior.ecommerceuserapi.service.user.IUserService;
 import com.rendersonjunior.dto.UserDTO;
-import br.com.rendersonjunior.ecommerceuserapi.service.user.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,7 +26,10 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    private IUserService userService;
+
+    @Autowired
+    private UserMapper mapper;
 
     @GetMapping
     public List<UserDTO> getUsers() {
@@ -38,8 +42,9 @@ public class UserController {
     }
 
     @GetMapping("/{cpf}/cpf")
-    public UserDTO findByCpf(@PathVariable String cpf) {
-        return userService.findByCpf(cpf);
+    public UserDTO findByCpf(@PathVariable String cpf,
+                                   @RequestParam(name = "key", required = true) final String key) {
+        return mapper.toDTO(userService.findByCpf(cpf, key));
     }
 
     @GetMapping("/search")
@@ -55,7 +60,7 @@ public class UserController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public UserDTO newUser(@RequestBody @Valid UserDTO userDTO) {
-        return userService.save(userDTO);
+        return mapper.toDTO(userService.save(mapper.fromDTO(userDTO)));
     }
 
     @DeleteMapping("/{id}")

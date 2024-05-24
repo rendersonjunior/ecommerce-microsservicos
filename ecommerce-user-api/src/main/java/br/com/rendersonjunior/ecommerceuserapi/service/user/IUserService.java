@@ -1,5 +1,6 @@
 package br.com.rendersonjunior.ecommerceuserapi.service.user;
 
+import br.com.rendersonjunior.ecommerceuserapi.model.User;
 import com.rendersonjunior.dto.UserDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,11 +13,11 @@ public interface IUserService {
 
     UserDTO findById(long userId);
 
-    UserDTO save(UserDTO userDTO);
+    User save(User user);
 
     UserDTO delete(long userId);
 
-    UserDTO findByCpf(String cpf);
+    User findByCpf(final String cpf, final String key);
 
     List<UserDTO> queryByName(String name);
 

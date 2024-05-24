@@ -37,6 +37,9 @@ public class User {
     @Column(name = "endereco")
     private String endereco;
 
+    @Column(name = "key")
+    private String key;
+
     @Column(name = "email")
     private String email;
 
