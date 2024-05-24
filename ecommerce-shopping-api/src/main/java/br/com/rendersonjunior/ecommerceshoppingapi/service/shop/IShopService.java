@@ -21,7 +21,7 @@ public interface IShopService {
 
     public ShopDTO findById(final Long shopId);
 
-    public Shop save(final Shop shop);
+    public Shop save(final Shop shop, final String key);
 
     public List<ShopDTO> getShopByFilter(final LocalDate dataInicio,
                                          final LocalDate dataFim,

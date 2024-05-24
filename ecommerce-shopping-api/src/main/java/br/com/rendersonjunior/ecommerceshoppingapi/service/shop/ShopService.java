@@ -80,9 +80,9 @@ public class ShopService implements IShopService {
         return shopMapper.toDTO(shop.orElseThrow(null));
     }
 
-    public Shop save(final Shop shop) {
+    public Shop save(final Shop shop, final String key) {
 
-        if (isNull(userService.getUserByCpf(shop.getUserIdentifier()))) {
+        if (isNull(userService.getUserByCpf(shop.getUserIdentifier(), key))) {
             throw new UserNotFoundException();
         }
 

@@ -10,14 +10,18 @@ public class UserService implements IUserService {
     private final String userApiURL = "http://localhost:8080";
 
     @Override
-    public UserDTO getUserByCpf(final String cpf) {
+    public UserDTO getUserByCpf(final String cpf,
+                                final String key) {
         try {
             final var webClient = WebClient.builder()
                     .baseUrl(userApiURL)
                     .build();
 
             final var user = webClient.get()
-                    .uri("/user/".concat(cpf).concat("/cpf"))
+                    .uri("/user/"
+                            .concat(cpf)
+                            .concat("/cpf?key=")
+                            .concat(key))
                     .retrieve()
                     .bodyToMono(UserDTO.class);
 

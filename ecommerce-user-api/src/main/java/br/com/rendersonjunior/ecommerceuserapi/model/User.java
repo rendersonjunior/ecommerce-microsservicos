@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,7 +25,8 @@ import java.time.LocalDateTime;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sq_users")
+    @SequenceGenerator(name = "sq_users", sequenceName = "sq_users", initialValue = 1, allocationSize = 1)
     @Column(name = "id")
     private long id;
 
@@ -37,7 +39,7 @@ public class User {
     @Column(name = "endereco")
     private String endereco;
 
-    @Column(name = "key")
+    @Column(name = "user_key")
     private String key;
 
     @Column(name = "email")
