@@ -1,17 +1,15 @@
 package br.com.rendersonjunior.ecommerceshoppingapi.service.shop;
 
-import br.com.rendersonjunior.ecommerceshoppingapi.model.Item;
-import com.rendersonjunior.dto.ItemDTO;
-import com.rendersonjunior.dto.ShopDTO;
-import com.rendersonjunior.dto.ShopReportDTO;
 import br.com.rendersonjunior.ecommerceshoppingapi.mapper.ShopMapper;
+import br.com.rendersonjunior.ecommerceshoppingapi.model.Item;
 import br.com.rendersonjunior.ecommerceshoppingapi.model.Shop;
 import br.com.rendersonjunior.ecommerceshoppingapi.repository.ReportRepository;
 import br.com.rendersonjunior.ecommerceshoppingapi.repository.ShopRepository;
 import br.com.rendersonjunior.ecommerceshoppingapi.repository.specification.SpecificationShopByFilters;
 import br.com.rendersonjunior.ecommerceshoppingapi.service.product.ProductService;
 import br.com.rendersonjunior.ecommerceshoppingapi.service.user.UserService;
-import com.rendersonjunior.dto.ShopRequestDTO;
+import com.rendersonjunior.dto.ShopDTO;
+import com.rendersonjunior.dto.ShopReportDTO;
 import com.rendersonjunior.exception.ProductNotFoundException;
 import com.rendersonjunior.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

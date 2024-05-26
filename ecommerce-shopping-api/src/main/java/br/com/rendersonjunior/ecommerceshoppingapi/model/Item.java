@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
-public class Item implements Comparable<Item>{
+public class Item implements Comparable<Item> {
 
     @Column(name = "PRODUCT_IDENTIFIER")
     private String productIdentifier;

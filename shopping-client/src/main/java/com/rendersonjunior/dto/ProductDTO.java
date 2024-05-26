@@ -17,20 +17,20 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductDTO {
-        Long id;
+    Long id;
 
-        @NotBlank
-        String productIdentifier;
+    @NotBlank
+    String productIdentifier;
 
-        @NotBlank
-        String nome;
+    @NotBlank
+    String nome;
 
-        @NotBlank
-        String descricao;
+    @NotBlank
+    String descricao;
 
-        @NotNull
-        BigDecimal preco;
+    @NotNull
+    BigDecimal preco;
 
-        @NotNull
-        CategoryDTO category;
+    @NotNull
+    CategoryDTO category;
 }

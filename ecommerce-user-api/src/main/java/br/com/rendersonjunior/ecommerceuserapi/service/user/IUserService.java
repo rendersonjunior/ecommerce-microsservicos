@@ -21,7 +21,7 @@ public interface IUserService {
 
     List<UserDTO> queryByName(String name);
 
-    UserDTO editUser(Long userId, UserDTO userDTO);
+    User editUser(Long userId, User userUpdate);
 
     Page<UserDTO> getAllPage(Pageable page);
 

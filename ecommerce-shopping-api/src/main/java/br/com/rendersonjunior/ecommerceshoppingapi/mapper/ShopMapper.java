@@ -1,7 +1,7 @@
 package br.com.rendersonjunior.ecommerceshoppingapi.mapper;
 
-import com.rendersonjunior.dto.ShopDTO;
 import br.com.rendersonjunior.ecommerceshoppingapi.model.Shop;
+import com.rendersonjunior.dto.ShopDTO;
 import com.rendersonjunior.dto.ShopRequestDTO;
 import org.mapstruct.Mapper;
 

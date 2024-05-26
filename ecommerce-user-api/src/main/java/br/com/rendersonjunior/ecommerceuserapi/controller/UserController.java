@@ -72,7 +72,7 @@ public class UserController {
     @PatchMapping("/{id}")
     public UserDTO editUser(@PathVariable Long id,
                             @RequestBody UserDTO userDTO) {
-        return userService.editUser(id, userDTO);
+        return mapper.toDTO(userService.editUser(id, mapper.fromDTO(userDTO)));
     }
 
 }

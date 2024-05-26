@@ -23,7 +23,7 @@ public class UserServiceTest {
     @InjectMocks
     private UserService userService;
 
-    @InjectMocks
+    @Mock
     private UserMapper mapper;
 
     @Mock
@@ -58,11 +58,11 @@ public class UserServiceTest {
     @Test
     public void testEditUser() {
         final var userDB = getUser(1L, "User Name", "123");
+        final var userDTO = getUser(1L, "User Name", "123");
 
         Mockito.when(userRepository.findById(1L)).thenReturn(Optional.of(userDB));
         Mockito.when(userRepository.save(Mockito.any())).thenReturn(userDB);
 
-        final var userDTO = mapper.toDTO(userDB);
         userDTO.setEndereco("Novo Endereço");
         userDTO.setTelefone("12345678910");
 
@@ -81,4 +81,5 @@ public class UserServiceTest {
                 .telefone("5432")
                 .build();
     }
+
 }

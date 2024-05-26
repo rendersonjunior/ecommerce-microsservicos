@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -72,26 +71,26 @@ public class UserService implements IUserService {
                 .collect(Collectors.toList());
     }
 
-    public UserDTO editUser(Long userId, UserDTO userDTO) {
+    public User editUser(Long userId, User userUpdate) {
         final var user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not exists"));
 
-        if (nonNull(userDTO.getNome()) && !user.getNome().equals(userDTO.getNome())) {
-            user.setNome(userDTO.getNome());
+        if (nonNull(userUpdate.getNome()) && !user.getNome().equals(userUpdate.getNome())) {
+            user.setNome(userUpdate.getNome());
         }
-        if (userDTO.getEmail() != null && !user.getEmail().equals(userDTO.getEmail())) {
-            user.setEmail(userDTO.getEmail());
-        }
-
-        if (userDTO.getTelefone() != null && !user.getTelefone().equals(userDTO.getEmail())) {
-            user.setTelefone(userDTO.getTelefone());
+        if (userUpdate.getEmail() != null && !user.getEmail().equals(userUpdate.getEmail())) {
+            user.setEmail(userUpdate.getEmail());
         }
 
-        if (userDTO.getEndereco() != null && !user.getEndereco().equals(userDTO.getEndereco())) {
-            user.setEndereco(userDTO.getEndereco());
+        if (userUpdate.getTelefone() != null && !user.getTelefone().equals(userUpdate.getEmail())) {
+            user.setTelefone(userUpdate.getTelefone());
         }
 
-        return userMapper.toDTO(userRepository.save(user));
+        if (userUpdate.getEndereco() != null && !user.getEndereco().equals(userUpdate.getEndereco())) {
+            user.setEndereco(userUpdate.getEndereco());
+        }
+
+        return userRepository.save(user);
     }
 
     public Page<UserDTO> getAllPage(Pageable page) {

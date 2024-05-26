@@ -12,9 +12,9 @@ import java.util.Optional;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query(value = "select p "
-            +  "from Product p "
-            +  "join Category c on p.category.id = c.id "
-            +  "where c.id = :categoryId")
+            + "from Product p "
+            + "join Category c on p.category.id = c.id "
+            + "where c.id = :categoryId")
     List<Product> getProductByCategory(@Param("categoryId") final long categoryId);
 
     Optional<Product> findByProductIdentifier(String productIdentifier);
