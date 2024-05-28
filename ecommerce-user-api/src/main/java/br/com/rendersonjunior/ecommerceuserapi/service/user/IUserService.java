@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface IUserService {
 
-    List<UserDTO> getAll();
+    List<User> getAll();
 
     UserDTO findById(long userId);
 

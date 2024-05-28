@@ -29,12 +29,8 @@ public class UserService implements IUserService {
         this.userMapper = userMapper;
     }
 
-    public List<UserDTO> getAll() {
-        final var usuarios = userRepository.findAll();
-        return usuarios
-                .stream()
-                .map(userMapper::toDTO)
-                .collect(Collectors.toList());
+    public List<User> getAll() {
+        return userRepository.findAll();
     }
 
     public UserDTO findById(long userId) {

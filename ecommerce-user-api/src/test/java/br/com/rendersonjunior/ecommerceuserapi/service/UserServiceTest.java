@@ -24,9 +24,6 @@ public class UserServiceTest {
     private UserService userService;
 
     @Mock
-    private UserMapper mapper;
-
-    @Mock
     private UserRepository userRepository;
 
     @Test
@@ -37,7 +34,7 @@ public class UserServiceTest {
 
         Mockito.when(userRepository.findAll()).thenReturn(users);
 
-        final List<UserDTO> usersReturn = userService.getAll();
+        final List<User> usersReturn = userService.getAll();
 
         Assertions.assertEquals(2, usersReturn.size());
     }
