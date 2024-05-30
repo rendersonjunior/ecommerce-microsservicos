@@ -7,8 +7,9 @@ import br.com.rendersonjunior.ecommerceshoppingapi.service.shop.IShopService;
 import br.com.rendersonjunior.ecommerceshoppingapi.service.user.IUserService;
 import com.rendersonjunior.dto.ItemDTO;
 import com.rendersonjunior.dto.ProductDTO;
-import com.rendersonjunior.dto.ShopDTO;
+import com.rendersonjunior.dto.ShopRequestDTO;
 import com.rendersonjunior.dto.UserDTO;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mapstruct.factory.Mappers;
@@ -46,12 +47,12 @@ public class ShopServiceTest {
                 .price(BigDecimal.valueOf(100))
                 .build();
 
-        final var shopDTO = ShopDTO.builder()
+        final var shopRequestDTO = ShopRequestDTO.builder()
                 .userIdentifier("123")
                 .items(new ArrayList<>())
                 .total(BigDecimal.valueOf(100))
                 .build();
-        shopDTO.getItems().add(itemDTO);
+        shopRequestDTO.getItems().add(itemDTO);
 
         final var productDTO = ProductDTO.builder()
                 .productIdentifier("123")
@@ -60,7 +61,13 @@ public class ShopServiceTest {
 
         Mockito.when(userService.getUserByCpf("123", "123")).thenReturn(new UserDTO());
         Mockito.when(productService.getProductByIdentifier("123")).thenReturn(productDTO);
-        Mockito.when(shopRepository.save(Mockito.any())).thenReturn(mapper.fromDTO(shopDTO));
+        Mockito.when(shopRepository.save(Mockito.any())).thenReturn(mapper.fromRequestDTO(shopRequestDTO));
 
+        final var shopDTO = mapper.fromDTO(shopService.save(shopRequestDTO, "123"));
+
+        Assertions.assertEquals(itemDTO.getPrice(), shopDTO.getTotal());
+        Assertions.assertEquals(1, shopRequestDTO.getItems().size());
+        Mockito.verify(shopRepository, Mockito.times(1)).save(Mockito.any());
     }
+
 }
