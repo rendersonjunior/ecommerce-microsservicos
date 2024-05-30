@@ -34,10 +34,7 @@ public class UserController {
 
     @GetMapping
     public List<UserDTO> getUsers() {
-        return userService.getAll()
-                .stream()
-                .map(mapper::toDTO)
-                .collect(Collectors.toList());
+        return userService.getAll();
     }
 
     @GetMapping("/{id}")
@@ -48,7 +45,7 @@ public class UserController {
     @GetMapping("/{cpf}/cpf")
     public UserDTO findByCpf(@PathVariable String cpf,
                              @RequestParam(name = "key", required = true) final String key) {
-        return mapper.toDTO(userService.findByCpf(cpf, key));
+        return userService.findByCpf(cpf, key);
     }
 
     @GetMapping("/search")
@@ -64,7 +61,7 @@ public class UserController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public UserDTO newUser(@RequestBody @Valid UserDTO userDTO) {
-        return mapper.toDTO(userService.save(mapper.fromDTO(userDTO)));
+        return userService.save(userDTO);
     }
 
     @DeleteMapping("/{id}")
@@ -76,7 +73,7 @@ public class UserController {
     @PatchMapping("/{id}")
     public UserDTO editUser(@PathVariable Long id,
                             @RequestBody UserDTO userDTO) {
-        return mapper.toDTO(userService.editUser(id, mapper.fromDTO(userDTO)));
+        return userService.editUser(id, userDTO);
     }
 
 }

@@ -29,8 +29,11 @@ public class UserService implements IUserService {
         this.userMapper = userMapper;
     }
 
-    public List<User> getAll() {
-        return userRepository.findAll();
+    public List<UserDTO> getAll() {
+        return userRepository.findAll()
+                .stream()
+                .map(userMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     public UserDTO findById(long userId) {
@@ -38,10 +41,10 @@ public class UserService implements IUserService {
                 .orElseThrow(UserNotFoundException::new));
     }
 
-    public User save(User user) {
-        user.setKey(UUID.randomUUID().toString());
-        user.setDataCadastro(LocalDateTime.now());
-        return userRepository.save(user);
+    public UserDTO save(UserDTO userDTO) {
+        userDTO.setKey(UUID.randomUUID().toString());
+        userDTO.setDataCadastro(LocalDateTime.now());
+        return userMapper.toDTO(userRepository.save(userMapper.fromDTO(userDTO)));
     }
 
     public UserDTO delete(long userId) {
@@ -51,10 +54,10 @@ public class UserService implements IUserService {
         return userMapper.toDTO(user);
     }
 
-    public User findByCpf(final String cpf, final String key) {
+    public UserDTO findByCpf(final String cpf, final String key) {
         final var user = userRepository.findByCpfAndKey(cpf, key);
         if (nonNull(user)) {
-            return user;
+            return userMapper.toDTO(user);
         }
         throw new UserNotFoundException();
     }
@@ -67,26 +70,26 @@ public class UserService implements IUserService {
                 .collect(Collectors.toList());
     }
 
-    public User editUser(Long userId, User userUpdate) {
+    public UserDTO editUser(Long userId, UserDTO userUpdateDTO) {
         final var user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not exists"));
 
-        if (nonNull(userUpdate.getNome()) && !user.getNome().equals(userUpdate.getNome())) {
-            user.setNome(userUpdate.getNome());
+        if (nonNull(userUpdateDTO.getNome()) && !user.getNome().equals(userUpdateDTO.getNome())) {
+            user.setNome(userUpdateDTO.getNome());
         }
-        if (userUpdate.getEmail() != null && !user.getEmail().equals(userUpdate.getEmail())) {
-            user.setEmail(userUpdate.getEmail());
-        }
-
-        if (userUpdate.getTelefone() != null && !user.getTelefone().equals(userUpdate.getEmail())) {
-            user.setTelefone(userUpdate.getTelefone());
+        if (userUpdateDTO.getEmail() != null && !user.getEmail().equals(userUpdateDTO.getEmail())) {
+            user.setEmail(userUpdateDTO.getEmail());
         }
 
-        if (userUpdate.getEndereco() != null && !user.getEndereco().equals(userUpdate.getEndereco())) {
-            user.setEndereco(userUpdate.getEndereco());
+        if (userUpdateDTO.getTelefone() != null && !user.getTelefone().equals(userUpdateDTO.getEmail())) {
+            user.setTelefone(userUpdateDTO.getTelefone());
         }
 
-        return userRepository.save(user);
+        if (userUpdateDTO.getEndereco() != null && !user.getEndereco().equals(userUpdateDTO.getEndereco())) {
+            user.setEndereco(userUpdateDTO.getEndereco());
+        }
+
+        return userMapper.toDTO(userRepository.save(user));
     }
 
     public Page<UserDTO> getAllPage(Pageable page) {

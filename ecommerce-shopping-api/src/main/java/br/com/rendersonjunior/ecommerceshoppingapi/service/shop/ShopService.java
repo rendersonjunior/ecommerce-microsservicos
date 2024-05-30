@@ -8,8 +8,10 @@ import br.com.rendersonjunior.ecommerceshoppingapi.repository.ShopRepository;
 import br.com.rendersonjunior.ecommerceshoppingapi.repository.specification.SpecificationShopByFilters;
 import br.com.rendersonjunior.ecommerceshoppingapi.service.product.ProductService;
 import br.com.rendersonjunior.ecommerceshoppingapi.service.user.UserService;
+import com.rendersonjunior.dto.ItemDTO;
 import com.rendersonjunior.dto.ShopDTO;
 import com.rendersonjunior.dto.ShopReportDTO;
+import com.rendersonjunior.dto.ShopRequestDTO;
 import com.rendersonjunior.exception.ProductNotFoundException;
 import com.rendersonjunior.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,27 +80,26 @@ public class ShopService implements IShopService {
         return shopMapper.toDTO(shop.orElseThrow(null));
     }
 
-    public Shop save(final Shop shop, final String key) {
+    public ShopDTO save(final ShopRequestDTO shopRequestDTO, final String key) {
 
-        if (isNull(userService.getUserByCpf(shop.getUserIdentifier(), key))) {
+        if (isNull(userService.getUserByCpf(shopRequestDTO.getUserIdentifier(), key))) {
             throw new UserNotFoundException();
         }
 
-        if (isFalse(validateProducts(shop.getItems()))) {
+        if (isFalse(validateProducts(shopRequestDTO.getItems()))) {
             throw new ProductNotFoundException();
         }
 
-        shop.setTotal(shop.getItems()
+        shopRequestDTO.setTotal(shopRequestDTO.getItems()
                 .stream()
-                .map(Item::getPrice)
+                .map(ItemDTO::getPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add));
-        shop.setDate(LocalDateTime.now());
-        shopRepository.save(shop);
+        shopRequestDTO.setDate(LocalDateTime.now());
+        return shopMapper.toDTO(shopRepository.save(shopMapper.fromRequestDTO(shopRequestDTO)));
 
-        return shop;
     }
 
-    private boolean validateProducts(final List<Item> items) {
+    private boolean validateProducts(final List<ItemDTO> items) {
 
         for (final var item : items) {
             final var productDTO = this.productService.getProductByIdentifier(item.getProductIdentifier());

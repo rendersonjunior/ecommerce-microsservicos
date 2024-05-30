@@ -25,17 +25,6 @@ public class ShopRequestDTO {
 
     private LocalDateTime date;
 
-    @Valid
     private List<ItemDTO> items;
-
-    @Getter
-    @Setter
-    @AllArgsConstructor
-    @NoArgsConstructor
-    public static class ItemDTO {
-
-        @NotBlank
-        private String productIdentifier;
-    }
 
 }

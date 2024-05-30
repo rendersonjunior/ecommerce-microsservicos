@@ -3,6 +3,7 @@ package br.com.rendersonjunior.ecommerceshoppingapi.service.shop;
 import br.com.rendersonjunior.ecommerceshoppingapi.model.Shop;
 import com.rendersonjunior.dto.ShopDTO;
 import com.rendersonjunior.dto.ShopReportDTO;
+import com.rendersonjunior.dto.ShopRequestDTO;
 import org.springframework.data.domain.Pageable;
 
 import java.math.BigDecimal;
@@ -20,7 +21,7 @@ public interface IShopService {
 
     public ShopDTO findById(final Long shopId);
 
-    public Shop save(final Shop shop, final String key);
+    public ShopDTO save(final ShopRequestDTO shopRequestDTO, final String key);
 
     public List<ShopDTO> getShopByFilter(final LocalDate dataInicio,
                                          final LocalDate dataFim,

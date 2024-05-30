@@ -68,7 +68,7 @@ public class ShopController {
     @ResponseStatus(HttpStatus.CREATED)
     public ShopDTO newShop(@RequestHeader(name = "key", required = true) final String key,
                            @Valid @RequestBody ShopRequestDTO shopRequestDTO) {
-        return mapper.toDTO(shopService.save(mapper.fromRequestDTO(shopRequestDTO), key));
+        return shopService.save(shopRequestDTO, key);
     }
 
 }
