@@ -3,7 +3,7 @@ package br.com.rendersonjunior.ecommerceuserapi.controller;
 import br.com.rendersonjunior.ecommerceuserapi.mapper.UserMapper;
 import br.com.rendersonjunior.ecommerceuserapi.model.User;
 import br.com.rendersonjunior.ecommerceuserapi.service.UserServiceTest;
-import br.com.rendersonjunior.ecommerceuserapi.service.user.UserService;
+import br.com.rendersonjunior.ecommerceuserapi.service.user.IUserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,7 +30,7 @@ public class UserControllerTest {
     private UserController userController;
 
     @Mock
-    private UserService userService;
+    private IUserService userService;
 
     private MockMvc mockMvc;
 
