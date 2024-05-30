@@ -1,9 +1,9 @@
 package br.com.rendersonjunior.ecommerceuserapi.controller;
 
 import br.com.rendersonjunior.ecommerceuserapi.mapper.UserMapper;
-import br.com.rendersonjunior.ecommerceuserapi.model.User;
 import br.com.rendersonjunior.ecommerceuserapi.service.UserServiceTest;
 import br.com.rendersonjunior.ecommerceuserapi.service.user.IUserService;
+import com.rendersonjunior.dto.UserDTO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -44,10 +44,10 @@ public class UserControllerTest {
 
     @Test
     public void testListUsers() throws Exception {
-        final List<User> users = new ArrayList<>();
-        users.add(UserServiceTest.getUser(1L, "Nome1", "123"));
+        final List<UserDTO> usersDTO = new ArrayList<>();
+        usersDTO.add(mapper.toDTO(UserServiceTest.getUser(1L, "Nome1", "123")));
 
-        Mockito.when(userService.getAll()).thenReturn(users);
+        Mockito.when(userService.getAll()).thenReturn(usersDTO);
 
         final MvcResult result = mockMvc
                 .perform(MockMvcRequestBuilders.get("/user"))

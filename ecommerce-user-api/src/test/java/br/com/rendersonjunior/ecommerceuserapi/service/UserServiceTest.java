@@ -1,14 +1,18 @@
 package br.com.rendersonjunior.ecommerceuserapi.service;
 
+import br.com.rendersonjunior.ecommerceuserapi.mapper.UserMapper;
 import br.com.rendersonjunior.ecommerceuserapi.model.User;
 import br.com.rendersonjunior.ecommerceuserapi.repository.UserRepository;
 import br.com.rendersonjunior.ecommerceuserapi.service.user.IUserService;
+import com.rendersonjunior.dto.UserDTO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mapstruct.factory.Mappers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
@@ -24,6 +28,9 @@ public class UserServiceTest {
     @Mock
     private UserRepository userRepository;
 
+    @Spy
+    private UserMapper mapper = Mappers.getMapper(UserMapper.class);
+
     @Test
     public void testListAllUsers() {
         final List<User> users = new ArrayList<>();
@@ -32,7 +39,7 @@ public class UserServiceTest {
 
         Mockito.when(userRepository.findAll()).thenReturn(users);
 
-        final List<User> usersReturn = userService.getAll();
+        final List<UserDTO> usersReturn = userService.getAll();
 
         Assertions.assertEquals(2, usersReturn.size());
     }
@@ -40,7 +47,7 @@ public class UserServiceTest {
     @Test
     public void testSaveUser() {
         final var userDB = getUser(1L, "User Name", "123");
-        final var userDTO = getUser(1L, "User Name", "123");
+        final var userDTO = mapper.toDTO(getUser(1L, "User Name", "123"));
 
         Mockito.when(userRepository.save(Mockito.any())).thenReturn(userDB);
 
@@ -53,7 +60,7 @@ public class UserServiceTest {
     @Test
     public void testEditUser() {
         final var userDB = getUser(1L, "User Name", "123");
-        final var userDTO = getUser(1L, "User Name", "123");
+        final var userDTO = mapper.toDTO(getUser(1L, "User Name", "123"));
 
         Mockito.when(userRepository.findById(1L)).thenReturn(Optional.of(userDB));
         Mockito.when(userRepository.save(Mockito.any())).thenReturn(userDB);
