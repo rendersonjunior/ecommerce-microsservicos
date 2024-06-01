@@ -11,3 +11,5 @@ algumas adaptações foram feitas com base em experiências prévias, incorporan
 - Banco de Dados H2
 - Mapstruct
 - JUnit/Mockito
+- JaCoCo
+- Spring Gateway
