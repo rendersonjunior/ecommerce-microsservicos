@@ -10,7 +10,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class ProductService implements IProductService {
 
     @Value("${PRODUCT_API_URL:http://localhost:8081}")
-    private static String productApiURL;
+    private String productApiURL;
 
     @Override
     public ProductDTO getProductByIdentifier(final String productIdentifier) {

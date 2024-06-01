@@ -1,7 +1,6 @@
 package br.com.rendersonjunior.ecommerceshoppingapi.service.shop;
 
 import br.com.rendersonjunior.ecommerceshoppingapi.mapper.ShopMapper;
-import br.com.rendersonjunior.ecommerceshoppingapi.model.Item;
 import br.com.rendersonjunior.ecommerceshoppingapi.model.Shop;
 import br.com.rendersonjunior.ecommerceshoppingapi.repository.ReportRepository;
 import br.com.rendersonjunior.ecommerceshoppingapi.repository.ShopRepository;

@@ -15,13 +15,13 @@ public class GatewayApplication {
     }
 
 	@Value("${USER_API_URL:http://localhost:8080}")
-	private static String userApiUrl;
+	private String userApiUrl;
 
 	@Value("${PRODUCT_API_URL:http://localhost:8081}")
-	private static String productApiUrl;
+	private String productApiUrl;
 
 	@Value("${SHOPPING_API_URL:http://localhost:8082}")
-	private static String shoppingApiUrl;
+	private String shoppingApiUrl;
 
 	@Bean
 	public RouteLocator customRouteLocator(final RouteLocatorBuilder builder) {
@@ -30,7 +30,7 @@ public class GatewayApplication {
 						.uri(userApiUrl))
 				.route("product_route", r -> r.path("/product/**")
 						.uri(productApiUrl))
-				.route("shopping_route", r -> r.path("/product/**")
+				.route("shopping_route", r -> r.path("/shopping/**")
 						.uri(shoppingApiUrl))
 				.build();
 	}

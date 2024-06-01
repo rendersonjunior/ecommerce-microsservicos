@@ -10,7 +10,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class UserService implements IUserService {
 
     @Value("${USER_API_URL:http://localhost:8080}")
-    private static String userApiURL;
+    private String userApiURL;
 
     @Override
     public UserDTO getUserByCpf(final String cpf,
