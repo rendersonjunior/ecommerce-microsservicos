@@ -1,5 +1,6 @@
 package br.com.rendersonjunior.gateway;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.gateway.route.RouteLocator;
@@ -13,21 +14,25 @@ public class GatewayApplication {
         SpringApplication.run(GatewayApplication.class, args);
     }
 
-	final static String uriUser = "http://localhost:8080";
-	final static String uriProduct = "http://localhost:8081";
-	final static String uriShopping = "http://localhost:8082";
+	@Value("${USER_API_URL:http://localhost:8080}")
+	private static String userApiUrl;
+
+	@Value("${PRODUCT_API_URL:http://localhost:8081}")
+	private static String productApiUrl;
+
+	@Value("${SHOPPING_API_URL:http://localhost:8082}")
+	private static String shoppingApiUrl;
 
 	@Bean
 	public RouteLocator customRouteLocator(final RouteLocatorBuilder builder) {
 		return builder.routes()
 				.route("user_route", r -> r.path("/user/**")
-						.uri(uriUser))
+						.uri(userApiUrl))
 				.route("product_route", r -> r.path("/product/**")
-						.uri(uriProduct))
+						.uri(productApiUrl))
 				.route("shopping_route", r -> r.path("/product/**")
-						.uri(uriShopping))
+						.uri(shoppingApiUrl))
 				.build();
 	}
-
 
 }
