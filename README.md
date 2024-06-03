@@ -13,3 +13,4 @@ algumas adaptações foram feitas com base em experiências prévias, incorporan
 - JUnit/Mockito
 - JaCoCo
 - Spring Gateway
+- Docker
