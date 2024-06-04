@@ -1,6 +1,6 @@
 package br.com.rendersonjunior.ecommerceshoppingapi.service;
 
-import br.com.rendersonjunior.ecommerceshoppingapi.service.product.IProductService;
+import br.com.rendersonjunior.ecommerceshoppingapi.service.product.ProductService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rendersonjunior.dto.ProductDTO;
 import okhttp3.mockwebserver.MockResponse;
@@ -24,7 +24,7 @@ public class ProductServiceTest {
     public static String url = "http://localhost:%s";
 
     @InjectMocks
-    private IProductService productService;
+    private ProductService productService;
 
     @BeforeEach
     void setUp() throws IOException {

@@ -3,7 +3,7 @@ package br.com.rendersonjunior.ecommerceuserapi.service;
 import br.com.rendersonjunior.ecommerceuserapi.mapper.UserMapper;
 import br.com.rendersonjunior.ecommerceuserapi.model.User;
 import br.com.rendersonjunior.ecommerceuserapi.repository.UserRepository;
-import br.com.rendersonjunior.ecommerceuserapi.service.user.IUserService;
+import br.com.rendersonjunior.ecommerceuserapi.service.user.UserService;
 import com.rendersonjunior.dto.UserDTO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -23,7 +23,7 @@ import java.util.Optional;
 public class UserServiceTest {
 
     @InjectMocks
-    private IUserService userService;
+    private UserService userService;
 
     @Mock
     private UserRepository userRepository;

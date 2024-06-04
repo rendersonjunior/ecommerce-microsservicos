@@ -2,9 +2,9 @@ package br.com.rendersonjunior.ecommerceshoppingapi.service;
 
 import br.com.rendersonjunior.ecommerceshoppingapi.mapper.ShopMapper;
 import br.com.rendersonjunior.ecommerceshoppingapi.repository.ShopRepository;
-import br.com.rendersonjunior.ecommerceshoppingapi.service.product.IProductService;
-import br.com.rendersonjunior.ecommerceshoppingapi.service.shop.IShopService;
-import br.com.rendersonjunior.ecommerceshoppingapi.service.user.IUserService;
+import br.com.rendersonjunior.ecommerceshoppingapi.service.product.ProductService;
+import br.com.rendersonjunior.ecommerceshoppingapi.service.shop.ShopService;
+import br.com.rendersonjunior.ecommerceshoppingapi.service.user.UserService;
 import com.rendersonjunior.dto.ItemDTO;
 import com.rendersonjunior.dto.ProductDTO;
 import com.rendersonjunior.dto.ShopRequestDTO;
@@ -26,13 +26,13 @@ import java.util.ArrayList;
 public class ShopServiceTest {
 
     @InjectMocks
-    private IShopService shopService;
+    private ShopService shopService;
 
     @Mock
-    private IUserService userService;
+    private UserService userService;
 
     @Mock
-    private IProductService productService;
+    private ProductService productService;
 
     @Mock
     private ShopRepository shopRepository;
@@ -59,9 +59,11 @@ public class ShopServiceTest {
                 .preco(BigDecimal.valueOf(100))
                 .build();
 
+        final var shopConverted = mapper.fromRequestDTO(shopRequestDTO);
+
         Mockito.when(userService.getUserByCpf("123", "123")).thenReturn(new UserDTO());
         Mockito.when(productService.getProductByIdentifier("123")).thenReturn(productDTO);
-        Mockito.when(shopRepository.save(Mockito.any())).thenReturn(mapper.fromRequestDTO(shopRequestDTO));
+        Mockito.when(shopRepository.save(Mockito.any())).thenReturn(shopConverted);
 
         final var shopDTO = mapper.fromDTO(shopService.save(shopRequestDTO, "123"));
 
