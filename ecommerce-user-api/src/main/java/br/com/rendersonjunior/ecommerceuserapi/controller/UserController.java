@@ -38,12 +38,12 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public UserDTO findById(@PathVariable Long id) {
+    public UserDTO findById(@PathVariable("id") final Long id) {
         return userService.findById(id);
     }
 
     @GetMapping("/{cpf}/cpf")
-    public UserDTO findByCpf(@PathVariable String cpf,
+    public UserDTO findByCpf(@PathVariable("cpf") final String cpf,
                              @RequestParam(name = "key", required = true) final String key) {
         return userService.findByCpf(cpf, key);
     }
@@ -66,12 +66,12 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long id) {
+    public void delete(@PathVariable("id") Long id) {
         userService.delete(id);
     }
 
     @PatchMapping("/{id}")
-    public UserDTO editUser(@PathVariable Long id,
+    public UserDTO editUser(@PathVariable("id") Long id,
                             @RequestBody UserDTO userDTO) {
         return userService.editUser(id, userDTO);
     }
