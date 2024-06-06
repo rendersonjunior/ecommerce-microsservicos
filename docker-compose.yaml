@@ -1,0 +1,41 @@
+version: "3.5"
+
+services:
+  user:
+    image: loja/ecommerce-user-api
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: jdbc:h2:mem:testdb
+      DB_USER: sa
+      DB_PASSWORD:
+  product:
+    image: loja/ecommerce-product-api
+    ports:
+      - "8081:8081"
+    environment:
+      DB_URL: jdbc:h2:mem:testdb
+      DB_USER: sa
+      DB_PASSWORD:
+  shopping:
+    image: loja/ecommerce-shopping-api
+    ports:
+      - "8082:8082"
+    environment:
+      DB_URL: jdbc:h2:mem:testdb
+      DB_USER: sa
+      DB_PASSWORD:
+      PRODUCT_API_URL: http://product:8081
+      USER_API_URL: http://user:8080
+  gateway:
+    image: loja/gateway
+    ports:
+      - "8084:8084"
+    environment:
+      PRODUCT_API_URL: http://product:8081
+      USER_API_URL: http://user:8080
+      SHOPPING_API_URL: http://shopping:8082
+    depends_on:
+      - user
+      - product
+      - shopping
