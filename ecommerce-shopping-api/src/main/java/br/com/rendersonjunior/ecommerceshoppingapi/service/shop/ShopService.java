@@ -23,9 +23,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import static org.apache.commons.lang3.BooleanUtils.isFalse;
 
 import static java.util.Objects.isNull;
-import static org.apache.commons.lang3.BooleanUtils.isFalse;
 
 @Service
 public class ShopService implements IShopService {
@@ -85,7 +85,8 @@ public class ShopService implements IShopService {
             throw new UserNotFoundException();
         }
 
-        if (isFalse(validateProducts(shopRequestDTO.getItems()))) {
+        final var isProductIsValid = validateProducts(shopRequestDTO.getItems());
+        if (isFalse(isProductIsValid)) {
             throw new ProductNotFoundException();
         }
 
@@ -95,7 +96,6 @@ public class ShopService implements IShopService {
                 .reduce(BigDecimal.ZERO, BigDecimal::add));
         shopRequestDTO.setDate(LocalDateTime.now());
         return shopMapper.toDTO(shopRepository.save(shopMapper.fromRequestDTO(shopRequestDTO)));
-
     }
 
     private boolean validateProducts(final List<ItemDTO> items) {
