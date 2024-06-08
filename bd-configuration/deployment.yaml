@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: h2
+  labels:
+    app: h2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: h2
+  template:
+    metadata:
+      labels:
+        app: h2
+    spec:
+      containers:
+        - name: h2
+          image: h2:latest
+          ports:
+            containerPort: 5432
+          env:
+            - name: DB_USER
+              value: h2
+            - name: DB_DB
+              value: dev
+            - name: DB_PASSWORD
+              value:
