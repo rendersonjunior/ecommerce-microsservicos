@@ -1,6 +1,7 @@
 package br.com.rendersonjunior.ecommerceproductapi.service;
 
 import br.com.rendersonjunior.ecommerceproductapi.mapper.ProductMapper;
+import br.com.rendersonjunior.ecommerceproductapi.model.Category;
 import br.com.rendersonjunior.ecommerceproductapi.model.Product;
 import br.com.rendersonjunior.ecommerceproductapi.repository.ProductRepository;
 import br.com.rendersonjunior.ecommerceproductapi.service.product.ProductService;
@@ -34,8 +35,9 @@ public class ProductServiceTest {
     @Test
     public void testListAllProducts() {
         final List<Product> products = new ArrayList<>();
-        products.add(getProduct(1L, "prod", "prod teste", BigDecimal.ONE));
-        products.add(getProduct(2L, "prod 2", "prod teste 2", BigDecimal.TEN));
+        final var category = getCategory(1L, "Category");
+        products.add(getProduct(1L, "product", "prod", "prod teste", BigDecimal.ONE, category));
+        products.add(getProduct(2L, "product-2", "prod 2", "prod teste 2", BigDecimal.TEN, category));
 
         Mockito.when(productRepository.findAll()).thenReturn(products);
 
@@ -44,15 +46,39 @@ public class ProductServiceTest {
         Assertions.assertEquals(2, productsReturn.size());
     }
 
+    @Test
+    public void testSaveProduct() {
+        final var category = getCategory(1L, "Category");
+        final var productDB = getProduct(1L, "p01", "p1", "p-1", BigDecimal.TEN, category);
+        final var productDTO = mapper.toDTO(getProduct(1L, "p01", "p1", "p-1", BigDecimal.TEN, category));
+
+        Mockito.when(productRepository.save(Mockito.any())).thenReturn(productDB);
+
+        final var product = productService.save(productDTO);
+
+        Assertions.assertEquals(productDTO.getNome(), product.getNome());
+        Assertions.assertEquals(productDTO.getProductIdentifier(), product.getProductIdentifier());
+    }
+
+    public static Category getCategory(final Long id,
+                                       final String nome) {
+        return Category.builder().nome(nome).build();
+    }
+
     public static Product getProduct(final Long id,
+                                     final String productIdentifier,
                                      final String nome,
                                      final String descricao,
-                                     final BigDecimal preco) {
+                                     final BigDecimal preco,
+                                     final Category category) {
         return Product.builder()
                 .id(id)
+                .productIdentifier(productIdentifier)
                 .nome(nome)
                 .descricao(descricao)
                 .preco(preco)
+                .category(category)
                 .build();
     }
+
 }
