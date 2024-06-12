@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: h2
+  labels:
+    run: h2
+spec:
+  ports:
+    - port: 5432
+      targetPort: 5432
+      protocol: TCP
+  selector:
+    app: h2
