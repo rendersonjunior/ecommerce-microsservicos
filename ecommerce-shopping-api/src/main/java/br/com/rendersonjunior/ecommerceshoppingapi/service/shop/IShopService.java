@@ -1,6 +1,5 @@
 package br.com.rendersonjunior.ecommerceshoppingapi.service.shop;
 
-import br.com.rendersonjunior.ecommerceshoppingapi.model.Shop;
 import com.rendersonjunior.dto.ShopDTO;
 import com.rendersonjunior.dto.ShopReportDTO;
 import com.rendersonjunior.dto.ShopRequestDTO;

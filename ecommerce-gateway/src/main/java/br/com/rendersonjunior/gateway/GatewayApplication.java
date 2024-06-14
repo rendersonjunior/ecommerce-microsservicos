@@ -14,25 +14,25 @@ public class GatewayApplication {
         SpringApplication.run(GatewayApplication.class, args);
     }
 
-	@Value("${USER_API_URL:http://localhost:8080}")
-	private String userApiUrl;
+    @Value("${USER_API_URL:http://localhost:8080}")
+    private String userApiUrl;
 
-	@Value("${PRODUCT_API_URL:http://localhost:8081}")
-	private String productApiUrl;
+    @Value("${PRODUCT_API_URL:http://localhost:8081}")
+    private String productApiUrl;
 
-	@Value("${SHOPPING_API_URL:http://localhost:8082}")
-	private String shoppingApiUrl;
+    @Value("${SHOPPING_API_URL:http://localhost:8082}")
+    private String shoppingApiUrl;
 
-	@Bean
-	public RouteLocator customRouteLocator(final RouteLocatorBuilder builder) {
-		return builder.routes()
-				.route("user_route", r -> r.path("/user/**")
-						.uri(userApiUrl))
-				.route("product_route", r -> r.path("/product/**")
-						.uri(productApiUrl))
-				.route("shopping_route", r -> r.path("/shopping/**")
-						.uri(shoppingApiUrl))
-				.build();
-	}
+    @Bean
+    public RouteLocator customRouteLocator(final RouteLocatorBuilder builder) {
+        return builder.routes()
+                .route("user_route", r -> r.path("/user/**")
+                        .uri(userApiUrl))
+                .route("product_route", r -> r.path("/product/**")
+                        .uri(productApiUrl))
+                .route("shopping_route", r -> r.path("/shopping/**")
+                        .uri(shoppingApiUrl))
+                .build();
+    }
 
 }

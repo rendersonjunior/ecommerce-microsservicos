@@ -1,7 +1,6 @@
 package br.com.rendersonjunior.ecommerceuserapi.service.user;
 
 import br.com.rendersonjunior.ecommerceuserapi.mapper.UserMapper;
-import br.com.rendersonjunior.ecommerceuserapi.model.User;
 import br.com.rendersonjunior.ecommerceuserapi.repository.UserRepository;
 import com.rendersonjunior.dto.UserDTO;
 import com.rendersonjunior.exception.UserNotFoundException;
