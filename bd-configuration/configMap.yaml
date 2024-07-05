@@ -1,8 +1,0 @@
-kind: ConfigMap
-apiVersion: v1
-metadata:
-  name: h2-configmap
-data:
-  database_url: jdbc:h2:mem:testdb/dev
-  database_user: sa
-  database_password:
