@@ -1,37 +1,37 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: user-api
+  name: ecommerce-user-api
   labels:
-    app: user-api
+    app: ecommerce-user-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: user-api
+      app: ecommerce-user-api
   template:
     metadata:
       labels:
-        app: user-api
+        app: ecommerce-user-api
     spec:
       containers:
-        - name: user-api
-          image: loja/user-api:latest
+        - name: ecommerce-user-api
+          image: loja/ecommerce-user-api:latest
           imagePullPolicy: Never
           ports:
             - containerPort: 8080
           env:
-            - name: POSTGRES_URL
+            - name: DB_URL
               valueFrom:
                 configMapKeyRef:
                   name: postgres-configmap
                   key: database_url
-            - name: POSTGRES_USER
+            - name: DB_USER
               valueFrom:
                 configMapKeyRef:
                   name: postgres-configmap
                   key: database_user
-            - name: POSTGRES_PASSWORD
+            - name: DB_PASSWORD
               valueFrom:
                 configMapKeyRef:
                   name: postgres-configmap

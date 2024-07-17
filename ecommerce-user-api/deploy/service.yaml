@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: user-api
+  name: ecommerce-user-api
   labels:
-    run: user-api
+    run: ecommerce-user-api
 spec:
   ports:
     - port: 8080
       targetPort: 8080
       protocol: TCP
   selector:
-    app: user-api
+    app: ecommerce-user-api
