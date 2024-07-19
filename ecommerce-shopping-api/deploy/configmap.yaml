@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ecommerce-shopping-api-configmap
+data:
+  user_api_url: http://ecommerce-user-api:8080/
+  product_api_url: http://ecommerce-product-api:8081/
