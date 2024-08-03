@@ -21,17 +21,17 @@ spec:
           ports:
             - containerPort: 8080
           env:
-            - name: DB_URL
+            - name: POSTGRES_URL
               valueFrom:
                 configMapKeyRef:
                   name: postgres-configmap
                   key: database_url
-            - name: DB_USER
+            - name: POSTGRES_USER
               valueFrom:
                 configMapKeyRef:
                   name: postgres-configmap
                   key: database_user
-            - name: DB_PASSWORD
+            - name: POSTGRES_PASSWORD
               valueFrom:
                 configMapKeyRef:
                   name: postgres-configmap

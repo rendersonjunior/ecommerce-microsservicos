@@ -1,30 +1,41 @@
 version: "3.5"
 
 services:
+  postgres:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: dev
+      POSTGRES_PASSWORD: postgres
+
   user:
-    image: loja/ecommerce-user-api
+    image: loja/ecommerce-user-api:latest
     ports:
       - "8080:8080"
     environment:
-      DB_URL: jdbc:h2:mem:testdb
-      DB_USER: sa
-      DB_PASSWORD:
+      POSTGRES_URL: jdbc:postgresql://postgres:5432/dev
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    depends_on:
+      - postgres
   product:
     image: loja/ecommerce-product-api
     ports:
       - "8081:8081"
     environment:
-      DB_URL: jdbc:h2:mem:testdb
-      DB_USER: sa
-      DB_PASSWORD:
+      POSTGRES_URL: jdbc:postgresql://postgres:5432/dev
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
   shopping:
     image: loja/ecommerce-shopping-api
     ports:
       - "8082:8082"
     environment:
-      DB_URL: jdbc:h2:mem:testdb
-      DB_USER: sa
-      DB_PASSWORD:
+      POSTGRES_URL: jdbc:postgresql://postgres:5432/dev
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
       PRODUCT_API_URL: http://product:8081
       USER_API_URL: http://user:8080
   gateway:
@@ -39,3 +50,5 @@ services:
       - user
       - product
       - shopping
+
+

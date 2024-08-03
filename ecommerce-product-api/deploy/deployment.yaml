@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: product-api
+  name: ecommerce-product-api
   labels:
-    app: product-api
+    app: ecommerce-product-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: product-api
+      app: ecommerce-product-api
   template:
     metadata:
       labels:
-        app: product-api
+        app: ecommerce-product-api
     spec:
       containers:
-        - name: product-api
-          image: loja/product-api:latest
+        - name: ecommerce-product-api
+          image: loja/ecommerce-product-api:latest
           imagePullPolicy: Never
           ports:
             - containerPort: 8081
