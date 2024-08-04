@@ -8,9 +8,9 @@ algumas adaptações foram feitas com base em experiências prévias, incorporan
 
 - Java 17
 - Lombok
-- Banco de Dados H2
+- Postgres
 - Mapstruct
 - JUnit/Mockito
-- JaCoCo
+- JaCoCo (Cobertura de Testes)
 - Spring Gateway
 - Docker
