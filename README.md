@@ -14,3 +14,4 @@ algumas adaptações foram feitas com base em experiências prévias, incorporan
 - JaCoCo (Cobertura de Testes)
 - Spring Gateway
 - Docker
+- Kubernetes (Minikube)
