@@ -1,6 +1,13 @@
 # Projeto Java Spring com Microsserviços
 
-Este projeto implementa uma arquitetura de microsserviços utilizando Java Spring, Docker e Kubernetes. A base do projeto é orientada pelo livro *Backend Java com Microsserviços, Spring Boot e Kubernetes* de Eduardo Santana. Algumas adaptações foram feitas com base em experiências prévias, incorporando outras tecnologias onde aplicável.
+Este projeto implementa uma arquitetura de microsserviços utilizando Java Spring, Docker, Kubernetes e Kafka. 
+A base de conhecimento do projeto é inspirada pelos livros:<br>
+- *Backend Java com Microsserviços, Spring Boot e Kubernetes* de Eduardo Santana;
+- *Apache Kafka e Spring Boot* de Eduardo Santana.<br>
+
+A ideia deste projeto é ser utilizado como base de estudo para que seja agregado conhecimentos em diversas tecnologias 
+que podem ser aplicadas em uma arquitetura de microsserviços. Os livros servem como base de estudo, pois, existem foram 
+aplicadas outras tecnologias e boas práticas com base em experiências prévias, onde aplicável.
 
 ## Índice
 
@@ -38,6 +45,9 @@ O projeto foi configurado em um cluster do Kubernetes. O Minikube foi escolhido 
 Para interação com o cluster do Kubernetes (Minikube), foi escolhido o Kubectl, que permite realizar operações como criar, inspecionar, atualizar e excluir recursos do Kubernetes, além de monitorar o status de aplicações e gerenciar o ciclo de vida dos pods e outros recursos.
 
 [Instalação do Kubectl](https://kubernetes.io/pt-br/docs/tasks/tools/install-kubectl-linux/)
+
+### Kafka
+(Em construção...)
 
 ## Instalação
 
