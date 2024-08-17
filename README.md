@@ -1,13 +1,11 @@
 # Projeto Java Spring com Microsserviços
 
-Este projeto implementa uma arquitetura de microsserviços utilizando Java Spring, Docker, Kubernetes e Kafka. 
-A base de conhecimento do projeto é inspirada pelos livros:<br>
-- *Backend Java com Microsserviços, Spring Boot e Kubernetes* de Eduardo Santana;
-- *Apache Kafka e Spring Boot* de Eduardo Santana.<br>
+Este projeto implementa uma arquitetura de microsserviços utilizando Java Spring, Docker, Kubernetes e Kafka.
 
-A ideia deste projeto é ser utilizado como base de estudo para que seja agregado conhecimentos em diversas tecnologias 
-que podem ser aplicadas em uma arquitetura de microsserviços. Os livros servem como base de estudo, pois, existem foram 
-aplicadas outras tecnologias e boas práticas com base em experiências prévias, onde aplicável.
+O objetivo deste projeto é servir como uma base de estudo para aprofundar conhecimentos em diversas tecnologias 
+aplicáveis a uma arquitetura de microsserviços. As referências do projeto fornecem uma base prática e fundamentação 
+teórica, mas, além disso, foram incorporadas outras tecnologias e boas práticas, baseadas em experiências prévias, 
+quando apropriado.
 
 ## Índice
 
@@ -18,7 +16,8 @@ aplicadas outras tecnologias e boas práticas com base em experiências prévias
     - [Kubectl](#kubectl)
 4. [Instalação](#instalação)
 5. [Uso](#uso)
-6. [Licença](#licença)
+6. [Referências](#referências)
+7. [Licença](#licença)
 
 ## Tecnologias
 
@@ -134,6 +133,10 @@ minikube tunnel
 ```
 Obs: Este comando requer privilégios de root e o terminal deve permanecer aberto para uso. Após esse passo, 
 teste novamente o acesso aos serviços do cluster.
+
+## Referências
+- *Backend Java com Microsserviços, Spring Boot e Kubernetes* de Eduardo Santana;
+- *Apache Kafka e Spring Boot* de Eduardo Santana.<br>
 
 ## Licença
 Este projeto está licenciado sob a Licença MIT.
