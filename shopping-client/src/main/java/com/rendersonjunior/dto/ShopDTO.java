@@ -27,6 +27,8 @@ public class ShopDTO {
 
     private LocalDateTime date;
 
+    private String status;
+
     @Valid
     private List<ItemDTO> items;
 
