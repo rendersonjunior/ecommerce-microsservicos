@@ -22,6 +22,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static java.util.Objects.isNull;
@@ -94,7 +95,9 @@ public class ShopService implements IShopService {
                 .stream()
                 .map(ItemDTO::getPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add));
+        shopRequestDTO.setUserIdentifier(UUID.randomUUID().toString());
         shopRequestDTO.setDate(LocalDateTime.now());
+        shopRequestDTO.setStatus("PENDING");
         return shopMapper.toDTO(shopRepository.save(shopMapper.fromRequestDTO(shopRequestDTO)));
     }
 
