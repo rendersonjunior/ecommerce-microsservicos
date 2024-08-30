@@ -11,6 +11,7 @@ import com.rendersonjunior.dto.ItemDTO;
 import com.rendersonjunior.dto.ShopDTO;
 import com.rendersonjunior.dto.ShopReportDTO;
 import com.rendersonjunior.dto.ShopRequestDTO;
+import com.rendersonjunior.enumerated.StatusEnum;
 import com.rendersonjunior.exception.ProductNotFoundException;
 import com.rendersonjunior.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,7 +98,7 @@ public class ShopService implements IShopService {
                 .reduce(BigDecimal.ZERO, BigDecimal::add));
         shopRequestDTO.setUserIdentifier(UUID.randomUUID().toString());
         shopRequestDTO.setDate(LocalDateTime.now());
-        shopRequestDTO.setStatus("PENDING");
+        shopRequestDTO.setStatus(StatusEnum.PENDING);
         return shopMapper.toDTO(shopRepository.save(shopMapper.fromRequestDTO(shopRequestDTO)));
     }
 
