@@ -1,6 +1,7 @@
 package br.com.rendersonjunior.ecommerceshoppingapi.model;
 
 
+import com.rendersonjunior.enumerated.StatusEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,6 +28,9 @@ public class Shop implements Comparable<Shop> {
 
     @Column(name = "user_identifier")
     private String userIdentifier;
+
+    @Enumerated(EnumType.STRING)
+    private StatusEnum status;
 
     @Column(name = "total")
     private BigDecimal total;

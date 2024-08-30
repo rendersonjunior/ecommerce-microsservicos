@@ -1,5 +1,6 @@
 package com.rendersonjunior.dto;
 
+import com.rendersonjunior.enumerated.StatusEnum;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,6 +22,8 @@ public class ShopRequestDTO {
 
     @NotBlank
     private String userIdentifier;
+
+    private StatusEnum status;
 
     private BigDecimal total;
 

@@ -1,0 +1,1 @@
+alter table shopping.shop add column status varchar(20);
